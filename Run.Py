@@ -53,7 +53,20 @@ async def add(str1):
 # 特定のプレイリストへ追加
 @bot.command()
 async def addTo(str1, str2):
-    pass
+    # フォルダとファイルのチェック
+    if os.path.exists(playlist_folder_path):
+        path = playlist_folder_path+str1
+        if os.path.isfile(path):
+            # 指定されたファイルに書き込む
+            f = open(path, 'a')
+            f.write(str2+"\n")
+            f.close()
+            await bot.say("追加が完了しました。")
+        else:
+            await bot.say(str1 + " というファイルは存在しません。")
+    else:
+        await bot.say(playlist_folder_path + " というディレクトリは存在しません。")
+
 
 # プレイリストの中身を表示
 @bot.command()
