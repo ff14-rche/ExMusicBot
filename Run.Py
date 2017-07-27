@@ -84,6 +84,23 @@ async def show():
     else:
         await bot.say(config_folder_path + " というディレクトリは存在しません。")
 
+# 特定のプレイリストの中身を表示
+@bot.command()
+async def showTo(str1):
+    # フォルダ&ファイルチェック
+    if os.path.exists(playlist_folder_path):
+        path = playlist_folder_path+str1
+        if os.path.isfile(path):
+            # ファイルの中身を表示
+            f = open(path)
+            data = f.read()
+            f.close()
+            await bot.say(data)
+        else:
+            await bot.say(def_playlist_name + " というファイルは存在しません。")
+    else:
+        await bot.say(config_folder_path + " というディレクトリは存在しません。")
+
 # プレイリストのチェック
 @bot.command()
 async def check():
