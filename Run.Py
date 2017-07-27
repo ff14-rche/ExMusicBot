@@ -67,6 +67,36 @@ async def addTo(str1, str2):
     else:
         await bot.say(playlist_folder_path + " というディレクトリは存在しません。")
 
+# プレイリストから特定の曲を削除
+@bot.command()
+async def deleat(str1):
+    if os.path.exists(def_playlist_full_path):
+        if os.path.isfile(def_playlist_full_path):
+            # 現在のプレイリストから削除
+            f = open(def_playlist_full_path, 'r')
+            temp = f.read()
+            f.close()
+            new = str(temp).replace(str1+"\n", "")
+            f = open(def_playlist_full_path, 'w')
+            f.write(new)
+            f.close()
+            # 上と同じプレイリストを探して削除
+            path = config_folder_path+current_playlist_file_name
+            f = open(path, 'r')
+            current_name = f.read()
+            f.close()
+            f = open(playlist_folder_path+current_name, 'r')
+            temp = f.read()
+            f.close()
+            new = str(temp).replace(str1+"\n", "")
+            f = open(playlist_folder_path+current_name, 'w')
+            f.write(new)
+            f.close()
+            await bot.say(str1 + " をプレイリストから削除しました。")
+        else:
+            await bot.say(str1 + " というファイルは存在しません。")
+    else:
+        await bot.say(playlist_folder_path + " というディレクトリは存在しません。")
 
 # プレイリストの中身を表示
 @bot.command()
