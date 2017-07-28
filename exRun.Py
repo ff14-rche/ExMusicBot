@@ -4,7 +4,7 @@ import os
 import shutil
 
 # Token
-token = 'MzM5NjY4NzcxNTc0Nzc1ODA4.DFnUtQ.RxCezmtfifm2xgVyZEjZtg382Mg'
+token = 'MzQwNTM1OTMwMTYxMDcwMDkw.DFz8Tw.jjpyNZeBiP0k6kz_tIIyON6AfFU'
 # デフォルトのフォルダ
 config_folder_path = "config/"
 # プレイリストのフォルダ
@@ -156,6 +156,7 @@ async def switch(name):
                 f = open(current_play_list_full_path, 'w')
                 f.write(name)
                 f.close()
+                await bot.say("!restart")
             else:
                 await bot.say(current_playlist_file_name + " というファイルが存在しません。")
             # ファイルをデフォルトの場所にコピー
