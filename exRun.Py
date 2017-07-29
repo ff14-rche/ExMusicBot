@@ -20,7 +20,7 @@ current_play_list_full_path = config_folder_path+current_playlist_file_name
 
 
 # Discord
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='#')
 
 #@client.event
 @bot.event
@@ -97,6 +97,27 @@ async def deleat(str1):
             await bot.say(str1 + " というファイルは存在しません。")
     else:
         await bot.say(playlist_folder_path + " というディレクトリは存在しません。")
+
+# 特定のプレイリストから曲を削除
+@bot.command()
+async def deleatTo(str1, str2):
+    # フォルダとファイルのチェック
+    if os.path.exists(playlist_folder_path):
+        path = playlist_folder_path+str1
+        if os.path.isfile(path):
+            f = open(playlist_folder_path+str1)
+            temp = f.read()
+            f.close()
+            new = str(temp).replace(str2+"\n", "")
+            f = open(playlist_folder_path+str1, 'w')
+            f.write(new)
+            f.close()
+            await bot.say(str2 + "をプレイリストから削除しました。")
+        else:
+            await bot.say(str1 + " というファイルは存在しません。")
+    else:
+        await bot.say(playlist_folder_path + " というディレクトリは存在しません。")
+
 
 # プレイリストの中身を表示
 @bot.command()
