@@ -1,2 +1,4 @@
 .vscode
 .python-version
+audio_cache/*
+
